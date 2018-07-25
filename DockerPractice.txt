@@ -1,3 +1,75 @@
 docker run -it ubuntu /bin/bash
 docker run --name ubuntu_image -it ubuntu /bin/bash
 
+Container naming 
+$docker run --name name_of_the_container -it ubuntu /bin/bash
+
+Starting stopped container
+$docker start name_of_the_container #we can give either name or ID of the container
+
+Attaching container
+$docker attach name_of_the_container #we can give container name as well instead of ID
+
+Creating daemonized containers
+$docker run --name name_of_the_container -d ubuntu /bin/bash -c "while true;do echo "hello"; sleep 1; done
+
+Fetch logs 
+$docker logs --f container_name
+
+docker top <container_ID>
+docker inspect <container_ID>
+docker inspect <container_ID>|grep -i IP
+docker inspect --format '{{.NetworkSettings.IPAddress}}' <container_ID> 
+docker inspect --format '{{State.Running}}' <container_ID> 
+
+Executing a command inside a container without attaching to it or without logging into the container
+$docker exec <container_ID> touch /tmp/SanjeevaKaki
+$docker exec <container_ID> hostname
+$docker stats [conteiner_IDs] #Displays live stream of usaeg of the container
+
+
+Docker events is what is happening inside the docker,
+$docker events
+Filter the docker events
+$docker events --filter event=attach #Shows only events related to attach
+$docker events --filter event=attach --filter event=die #Shows only events related to attach
+$docker events --since '1h'
+
+Exposing Our Container With Port Redirects, we will call this as port mapping
+
+- All ports are private by default
+- WHen you run docker run -p <port>...., that port becomes public
+- When docker run run -P ..(withour port number), all the ports declared with EXPOSE become public
+
+$docker run -p <hostport>:<container_port> nginx:latest
+$docker run -p 80:80 nginx:latest
+$docker run -d -p 80:80 nginx:latest
+
+DATA VOLUMES
+
+A volume is a specially designated directory within one or more containers that bypasses the Union File System
+- Volumes can be shared and reused between containers
+- A container doen't need to running to share it's volumes
+- Changes to a volume are made directly.
+- Changes to a volume wil not be included when you update the image
+- Volumes persist until no containers use them.
+
+Volumes declared from cmd-line
+$docker run -it /usr/data ubuntu
+
+Sharing volumes across containers
+--This is done using --volumes-from flag for docker run
+$docker eun --privileged=true -it -volumes-from <container_ID_or_name> <current container image name>
+$docker eun --privileged=true -it -volumes-from <container_ID_or_name> --volumes-from <another Container name or ID> <current container image name>
+
+Sharing directory between host and container
+$docker run -it -name <container name> -v /home/user/Docker:/data <current container image name> /bin/bash
+
+Renaming the container
+$docker rename <old_name> <new_name>
+
+To create your own image with customized packages
+$docker commit ubuntu_vol
+$docker image
+$docker tag <Image_ID> <Image_name>
+
