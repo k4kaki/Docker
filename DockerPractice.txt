@@ -96,8 +96,12 @@ RUN: Run the command when the container is being built
 CMD: specifies the command to run when a container is launched, if values are specified duriing launch it will override the Dockerfile value
 ENTRYPOINT: same as RUN, arguments we specify on the docker run command line will be passed as arguments to the command specified in the ENTRYPOINT
 %ENTRYPOINT["echo","Hi"]
-WORKDIR:
 
+WORKDIR: Provides a way to set the working directory for the container and the ENTRYPOINT and/or CMD to be executed when a container is lauched from the image.
+
+example: WORKDIR /usr/bin
+You can override the working directory at runtime with the -w flag
+$docker run -it /var ada/dockerfiles
 
 
 
