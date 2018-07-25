@@ -73,3 +73,31 @@ $docker commit ubuntu_vol
 $docker image
 $docker tag <Image_ID> <Image_name>
 
+
+
+
+############################DOCKER_FILES#############################
+---sample.file---
+FROM ubuntu
+RUN apt-get update
+RUN apt-get install vim
+
+
+build the image
+$docker build -t myFirstImage .
+
+Running the built image
+$docker run -it myFirstImage
+
+List the layers composing an image
+$docker history myFirstImage
+
+RUN: Run the command when the container is being built
+CMD: specifies the command to run when a container is launched, if values are specified duriing launch it will override the Dockerfile value
+ENTRYPOINT: same as RUN, arguments we specify on the docker run command line will be passed as arguments to the command specified in the ENTRYPOINT
+%ENTRYPOINT["echo","Hi"]
+WORKDIR:
+
+
+
+
