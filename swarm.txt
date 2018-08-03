@@ -1,0 +1,15 @@
+###Manager end commands###
+
+$docker swarm init --advertise-addr <ip-addr>
+$docker service ls
+$docker service ps <name>
+$docker service create <name> <image-name>
+$docker service rm <name>
+$docker service scale <name>=5
+$docker swarm leave --force #when you want collapse the cluster
+
+###Node end commands###
+$docker node ls
+$docker node ps
+$docker node rm  <id>
+$docker swarm leave --force
