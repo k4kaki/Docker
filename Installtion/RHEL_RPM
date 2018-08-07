@@ -1,0 +1,12 @@
+https://download.docker.com/linux/centos/7/x86_64/stable/Packages/
+
+download: docker-ce-17.03.2.ce-1.el7.centos.x86_64.rpm 2018-06-08 05:48 19M 
+download: docker-ce-selinux-17.03.2.ce-1.el7.centos.noarch.rpm 2018-06-08 05:48 29K
+
+yum -y install docker-ce-selinux-17.03.2.ce-1.el7.centos.noarch.rpm
+
+yum -y install docker-ce-17.03.2.ce-1.el7.centos.x86_64.rpm
+
+sudo systemctl start docker
+
+REF: install Docker CE 17.03 on RHEL7 https://nickjanetakis.com/blog/docker-tip-39-installing-docker-ce-on-redhat-rhel-7x https://docs.docker.com/install/linux/docker-ee/rhel/#set-up-the-repository
